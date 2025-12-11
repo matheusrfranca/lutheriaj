@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Souza Luthieria - Arte em Cordas</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/11.0.8/index.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: #000;
+      color: #f5f5f7;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Header Premium */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(0, 0, 0, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 600;
+      color: #f5f5f7;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #f5f5f7;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    /* Hero Premium */
+    .hero {
+      margin-top: 64px;
+      padding: 120px 40px 80px;
+      text-align: center;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(201, 160, 96, 0.1) 0%, transparent 70%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #f5f5f7 0%, #c9a060 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 24px;
+      color: #a1a1a6;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 14px 32px;
+      background: #c9a060;
+      color: #000;
+      border-radius: 980px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #d4ab6a;
+      transform: scale(1.05);
+    }
+
+    .btn-secondary {
+      padding: 14px 32px;
+      background: transparent;
+      color: #c9a060;
+      border: 2px solid #c9a060;
+      border-radius: 980px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(201, 160, 96, 0.1);
+      transform: scale(1.05);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 40px;
+      background: #000;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      color: #f5f5f7;
+    }
+
+    .section-header p {
+      font-size: 20px;
+      color: #a1a1a6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      border-radius: 24px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: #c9a060;
+      box-shadow: 0 20px 40px rgba(201, 160, 96, 0.15);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #c9a060 0%, #b8905a 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #f5f5f7;
+    }
+
+    .feature-card p {
+      color: #a1a1a6;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* Process Section */
+    .process {
+      padding: 100px 40px;
+      background: #0a0a0a;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .step {
+      text-align: center;
+      padding: 30px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #c9a060 0%, #b8905a 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 auto 24px;
+      color: #000;
+    }
+
+    .step h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #f5f5f7;
+    }
+
+    .step p {
+      color: #a1a1a6;
+      font-size: 15px;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 100px 40px;
+      background: #000;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial {
+      background: #1a1a1a;
+      border-radius: 24px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stars {
+      color: #c9a060;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-text {
+      color: #f5f5f7;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #c9a060 0%, #b8905a 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .author-info h4 {
+      font-size: 16px;
+      color: #f5f5f7;
+      margin-bottom: 4px;
+    }
+
+    .author-info p {
+      font-size: 14px;
+      color: #a1a1a6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 120px 40px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(201, 160, 96, 0.15) 0%, transparent 70%);
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: #f5f5f7;
+    }
+
+    .cta-section p {
+      font-size: 20px;
+      color: #a1a1a6;
+      margin-bottom: 40px;
+    }
+
+    /* Footer */
+    footer {
+      background: #0a0a0a;
+      padding: 60px 40px 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #f5f5f7;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: #a1a1a6;
+      text-decoration: none;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 12px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: #c9a060;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #a1a1a6;
+      font-size: 14px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: #1a1a1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c9a060;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #c9a060;
+      color: #000;
+      transform: translateY(-4px);
+    }
+
+    /* Animations */
+    .fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .slide-up {
+      animation: slideUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 12px 20px;
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 80px 20px 60px;
+      }
+
+      .features, .process, .testimonials {
+        padding: 60px 20px;
+      }
+
+      .features-grid,
+      .process-steps,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Souza Luthieria</div>
+      <ul class="nav-links">
+        <li><a href="#home">Início</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#processo">Processo</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero fade-in" id="home">
+    <div class="hero-content">
+      <h1>Arte em Cordas</h1>
+      <p>Transformando instrumentos em obras-primas sonoras com precisão e dedicação.</p>
+      <div class="cta-buttons">
+        <a href="#contato" class="btn-primary">Agendar Serviço</a>
+        <a href="#servicos" class="btn-secondary">Conhecer Serviços</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="servicos">
+    <div class="section-header slide-up">
+      <h2>Serviços Premium</h2>
+      <p>Cada instrumento recebe tratamento profissional com técnicas de luthieria de alta precisão</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card slide-up">
+        <div class="feature-icon">🎸</div>
+        <h3>Regulagem Completa</h3>
+        <p>Setup profissional incluindo altura das cordas, ajuste de tensor, nivelamento de trastes, nut, entonação perfeita e limpeza detalhada do instrumento.</p>
+      </div>
+      <div class="feature-card slide-up">
+        <div class="feature-icon">⚡</div>
+        <h3>Troca de Captadores</h3>
+        <p>Instalação de captadores premium com blindagem profissional, roteamento limpo de cabos e calibração precisa para extrair o melhor som do seu instrumento.</p>
+      </div>
+      <div class="feature-card slide-up">
+        <div class="feature-icon">🔧</div>
+        <h3>Manutenção Preventiva</h3>
+        <p>Limpeza profunda, hidratação do braço, polimento de trastes, lubrificação de partes móveis e inspeção completa para prolongar a vida útil do instrumento.</p>
+      </div>
+      <div class="feature-card slide-up">
+        <div class="feature-icon">✨</div>
+        <h3>Upgrades Personalizados</h3>
+        <p>Tarraxas de precisão, pontes de alta qualidade, blindagem eletrônica, pestanas de osso e outras melhorias para elevar seu instrumento a outro nível.</p>
+      </div>
+      <div class="feature-card slide-up">
+        <div class="feature-icon">🎯</div>
+        <h3>Nivelamento de Trastes</h3>
+        <p>Procedimento profissional que elimina trastejamentos, melhora a tocabilidade e proporciona ação baixa sem comprometer a sonoridade.</p>
+      </div>
+      <div class="feature-card slide-up">
+        <div class="feature-icon">🛠️</div>
+        <h3>Reparos Estruturais</h3>
+        <p>Conserto de trincas, colagem de headstock, reparo de eletrônica, substituição de componentes e restauração de instrumentos vintage.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="processo">
+    <div class="section-header slide-up">
+      <h2>Nosso Processo</h2>
+      <p>Metodologia profissional em cada etapa do serviço</p>
+    </div>
+    <div class="process-steps">
+      <div class="step slide-up">
+        <div class="step-number">1</div>
+        <h3>Avaliação Detalhada</h3>
+        <p>Inspeção completa do instrumento identificando necessidades, problemas estruturais e oportunidades de melhoria.</p>
+      </div>
+      <div class="step slide-up">
+        <div class="step-number">2</div>
+        <h3>Orçamento Transparente</h3>
+        <p>Apresentação clara dos serviços necessários, peças a serem substituídas e prazo de execução.</p>
+      </div>
+      <div class="step slide-up">
+        <div class="step-number">3</div>
+        <h3>Execução Premium</h3>
+        <p>Trabalho realizado com ferramentas profissionais, peças de qualidade e atenção aos mínimos detalhes.</p>
+      </div>
+      <div class="step slide-up">
+        <div class="step-number">4</div>
+        <h3>Entrega Perfeita</h3>
+        <p>Instrumento testado, regulado e entregue tocando perfeitamente, com garantia dos serviços realizados.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contato">
+    <div class="cta-content slide-up">
+      <h2>Pronto para Transformar Seu Instrumento?</h2>
+      <p>Entre em contato e descubra como podemos elevar a qualidade sonora e a tocabilidade do seu instrumento a um novo patamar.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/5527996031321" class="btn-primary">WhatsApp</a>
+        <a href="mailto:contato@souzaluthieria.com.br" class="btn-secondary">E-mail</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Souza Luthieria</h3>
+        <p>Arte em cordas com precisão e paixão desde 2015.</p>
+        <div class="social-links">
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="Facebook">📘</a>
+          <a href="#" title="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Serviços</h3>
+        <a href="#servicos">Regulagem</a>
+        <a href="#servicos">Manutenção</a>
+        <a href="#servicos">Upgrades</a>
+        <a href="#servicos">Reparos</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <p>📍 Vila Velha - ES</p>
+        <p>📱 (27) 99603-1321</p>
+        <p>✉️ contato@souzaluthieria.com.br</p>
+      </div>
+      <div class="footer-section">
+        <h3>Horário</h3>
+        <p>Segunda a Sexta: 9h às 18h</p>
+        <p>Sábado: 9h às 13h</p>
+        <p>Domingo: Fechado</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Souza Luthieria. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/5527996031321" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-5.155 1.383 1.383-5.146-0.32-0.527c-1.326-2.18-2.030-4.673-2.030-7.215 0-7.58 6.167-13.747 13.747-13.747s13.747 6.167 13.747 13.747c0 7.58-6.167 13.747-13.747 13.747zM21.98 18.436c-0.392-0.197-2.32-1.145-2.679-1.275s-0.621-0.197-0.883 0.197c-0.262 0.394-1.015 1.275-1.243 1.536s-0.458 0.295-0.85 0.098c-0.392-0.197-1.654-0.61-3.151-1.944-1.165-1.038-1.95-2.321-2.178-2.714s-0.024-0.605 0.172-0.801c0.177-0.177 0.392-0.458 0.589-0.687s0.262-0.394 0.392-0.656c0.131-0.262 0.066-0.491-0.033-0.687s-0.883-2.13-1.21-2.915c-0.319-0.768-0.644-0.664-0.883-0.676-0.228-0.012-0.491-0.015-0.753-0.015s-0.687 0.098-1.047 0.491c-0.36 0.394-1.373 1.342-1.373 3.273s1.406 3.797 1.603 4.058c0.197 0.262 2.767 4.224 6.706 5.925 0.937 0.405 1.668 0.646 2.239 0.827 0.944 0.3 1.802 0.257 2.481 0.156 0.757-0.113 2.32-0.949 2.647-1.865s0.327-1.702 0.229-1.865c-0.098-0.164-0.36-0.262-0.753-0.458z"/>
+    </svg>
+  </a>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Intersection Observer para animações
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.slide-up').forEach((el, index) => {
+      el.style.transitionDelay = `${index * 0.1}s`;
+      observer.observe(el);
+    });
+
+    // Header scroll effect
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        header.style.background = 'rgba(0, 0, 0, 0.95)';
+      } else {
+        header.style.background = 'rgba(0, 0, 0, 0.72)';
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // Hover effect nos cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-12px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>
